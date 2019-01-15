@@ -1,0 +1,50 @@
+import static org.opendatakit.gradle.Util.getValue
+import static org.opendatakit.gradle.Util.getVersionName
+
+plugins {
+  id 'java'
+  id 'idea'
+  id 'de.fuerstenau.buildconfig' version '1.1.8'
+}
+
+group 'org.opendatakit'
+version '0.0.1'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+  // CLI
+  compile group: 'commons-cli', name: 'commons-cli', version: '1.4'
+
+  // Logging & reporting
+  runtime group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+  compile group: 'org.slf4j', name: 'jcl-over-slf4j', version: '1.7.25'
+  compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
+  compile group: 'io.sentry', name: 'sentry', version: '1.7.16'
+
+  // Testing
+  testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+  testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+  testCompile 'org.hamcrest:hamcrest-library:1.3'
+}
+
+buildConfig {
+  appName = 'ODK Aggregate Updater'
+  version = getVersionName()
+  clsName = 'BuildConfig'
+  packageName = 'org.opendatakit.briefcase.buildconfig'
+  buildConfigField 'Boolean', 'SENTRY_ENABLED', getValue(this, "sentry.enabled", "false")
+  buildConfigField 'String', 'SENTRY_DSN', getValue(this, "sentry.dsn", "https://b6f023a5f17e44d9a46447f8827e2a41:1b1f33d68b1b4404b85cd627563d37f9@sentry.io/287258")
+}
+
+test {
+  useJUnitPlatform {
+    includeTags 'fast'
+    excludeTags 'slow'
+  }
+}

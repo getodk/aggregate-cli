@@ -1,0 +1,10 @@
+bin
+out
+*.iml
+.gradle
+.idea
+.DS_Store
+build
+logback.xml
+logback-test.xml
+gradle.properties
