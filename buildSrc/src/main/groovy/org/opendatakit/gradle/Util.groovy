@@ -34,6 +34,20 @@ class Util {
     println("Set ${path}:${key} to \"${value}\"")
   }
 
+  static def execute(cmd) {
+    ['bash', '-c', cmd].execute().waitFor()
+  }
+
+  static def makeExecutableJar(path) {
+    String jarPath = path.toString()
+    String executablePath = path.substring(0, path.lastIndexOf("."))
+
+    execute("echo \"#!/bin/sh\" > ${executablePath}")
+    execute("echo \"exec java -jar \\\$0 \"\\\$@\"\" >> ${executablePath}")
+    execute("cat ${jarPath} >> ${executablePath}")
+    execute("chmod +x ${executablePath}")
+  }
+
   static String getValue(obj, key, defaultValue) {
     if (obj.hasProperty(key))
       obj.getProperty(key)

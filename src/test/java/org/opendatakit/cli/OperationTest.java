@@ -21,15 +21,13 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
 
 class OperationTest {
 
-  private static final Consumer<Args> NO_OP = args -> {
-  };
-
+  private static final BiConsumer<Console, Args> NO_OP = (console, args) -> { };
 
   @Test
   void knows_if_it_has_required_params() {

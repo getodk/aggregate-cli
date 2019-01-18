@@ -38,9 +38,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * <p>Cli is a command line adapter. It helps define executable operations and their
+ * Cli is a command line adapter. It helps define executable operations and their
  * required and optional params.
- * <p>It defines some default operations like "show help" and "show version"
+ * <p>
+ * It defines some default operations like "show help" and "show version"
  */
 public class Cli {
   private static final Logger log = LoggerFactory.getLogger(Cli.class);
@@ -55,8 +56,8 @@ public class Cli {
   private final List<Consumer<Throwable>> onErrorCallbacks = new ArrayList<>();
 
   public Cli() {
-    register(Operation.of(SHOW_HELP, args -> printHelp()));
-    register(Operation.of(SHOW_VERSION, args -> printVersion()));
+    register(Operation.of(SHOW_HELP, (console, args) -> printHelp()));
+    register(Operation.of(SHOW_VERSION, (console, args) -> printVersion()));
   }
 
   /**
@@ -71,14 +72,9 @@ public class Cli {
    * <p>
    * When Briefcase detects this param, it will show a message, output the help and
    * exit with a non-zero status
-   *
-   * @param oldParam    the {@link Param} to mark as deprecated
-   * @param alternative the alternative {@link Operation} that Briefcase will suggest to be
-   *                    used instead of the deprecated Param
-   * @return self {@link Cli} instance to chain more method calls
    */
   public Cli deprecate(Param<?> oldParam, Operation alternative) {
-    operations.add(Operation.deprecated(oldParam, __ -> {
+    operations.add(Operation.deprecated(oldParam, (console, args) -> {
       log.warn("Trying to run deprecated param -{}", oldParam.shortCode);
       System.out.println("The param -" + oldParam.shortCode + " has been deprecated. Run Briefcase again with -" + alternative.param.shortCode + " instead");
       printHelp();
@@ -87,12 +83,6 @@ public class Cli {
     return this;
   }
 
-  /**
-   * Register an {@link Operation}
-   *
-   * @param operation an {@link Operation} instance
-   * @return self {@link Cli} instance to chain more method calls
-   */
   public Cli register(Operation operation) {
     operations.add(operation);
     return this;
@@ -101,9 +91,6 @@ public class Cli {
   /**
    * Register a {@link Runnable} block that will be executed if no {@link Operation}
    * is executed. For example, if the user passes no arguments when executing this program
-   *
-   * @param callback a {@link BiConsumer} that will receive the {@link Cli} and {@link CommandLine} instances
-   * @return self {@link Cli} instance to chain more method calls
    */
   public Cli otherwise(BiConsumer<Cli, CommandLine> callback) {
     otherwiseCallbacks.add(callback);
@@ -112,23 +99,21 @@ public class Cli {
 
   /**
    * Runs the command line program
-   *
-   * @param args command line arguments
-   * @see <a href="https://blog.idrsolutions.com/2015/03/java-8-consumer-supplier-explained-in-5-minutes/">Java 8 consumer supplier explained in 5 minutes</a>
    */
   public void run(String[] args) {
     Set<Param> allParams = getAllParams();
     CommandLine cli = getCli(args, allParams);
+    Console console = Console.std();
     try {
       requiredOperations.forEach(operation -> {
         checkForMissingParams(cli, operation.requiredParams);
-        operation.argsConsumer.accept(Args.from(cli, operation.requiredParams));
+        operation.accept(console, Args.from(cli, operation.requiredParams));
       });
 
       operations.forEach(operation -> {
         if (cli.hasOption(operation.param.shortCode)) {
           checkForMissingParams(cli, operation.requiredParams);
-          operation.argsConsumer.accept(Args.from(cli, operation.getAllParams()));
+          operation.accept(console, Args.from(cli, operation.getAllParams()));
           executedOperations.add(operation);
         }
       });
@@ -156,13 +141,6 @@ public class Cli {
     return this;
   }
 
-  /**
-   * Flatmap all required params from all required operations, all params
-   * from all operations and flatmap them into a {@link Set}&lt;{@link Param}>&gt;
-   *
-   * @return a {@link Set} of {@link Param}> instances
-   * @see <a href="https://www.mkyong.com/java8/java-8-flatmap-example/">Java 8 flatmap example</a>
-   */
   private Set<Param> getAllParams() {
     return Stream.of(
         requiredOperations.stream().flatMap(operation -> operation.requiredParams.stream()),
