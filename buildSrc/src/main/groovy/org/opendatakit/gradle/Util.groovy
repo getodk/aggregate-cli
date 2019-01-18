@@ -46,7 +46,7 @@ class Util {
   }
 
   static def zip(path) {
-    execute("zip -9 ${path}.zip ${path}")
+    execute("zip -j -9 ${path}.zip ${path}")
   }
 
   static String getValue(obj, key, defaultValue) {
