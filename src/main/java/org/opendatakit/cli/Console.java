@@ -49,6 +49,7 @@ public class Console {
   }
 
   public void exit(int status) {
+    out("You can ask for support at https://forum.opendatakit.org/c/support");
     System.exit(status);
   }
 

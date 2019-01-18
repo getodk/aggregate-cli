@@ -83,7 +83,13 @@ public class UpdateOperation {
       }
     });
 
-    Version selectedVersion = race(requestedVersion, latestVersion).orElseThrow(RuntimeException::new);
+    Optional<Version> maybeSelectedVersion = race(requestedVersion, latestVersion);
+    if (!maybeSelectedVersion.isPresent()) {
+      console.error("Can't install the selected version");
+      console.exit(1);
+    }
+
+    Version selectedVersion = maybeSelectedVersion.orElseThrow(RuntimeException::new);
 
     console.out("Installed version: " + installedVersion);
     console.out("Requested version: " + requestedVersion.map(Version::toString).orElse("None (defaults to latest available)"));
