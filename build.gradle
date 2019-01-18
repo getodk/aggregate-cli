@@ -1,5 +1,6 @@
 import static org.opendatakit.gradle.Util.getVersionName
 import static org.opendatakit.gradle.Util.makeExecutableJar
+import static org.opendatakit.gradle.Util.zip
 
 plugins {
   id 'java'
@@ -59,6 +60,7 @@ jar {
   }
 
   doLast {
-    makeExecutableJar("${buildDir}/libs/${archivesBaseName}-${version}.jar")
+    makeExecutableJar("${buildDir}/libs/${archivesBaseName}-${version}.jar", "${buildDir}/libs/aggregate-updater")
+    zip("${buildDir}/libs/aggregate-updater")
   }
 }

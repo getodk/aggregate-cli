@@ -38,14 +38,15 @@ class Util {
     ['bash', '-c', cmd].execute().waitFor()
   }
 
-  static def makeExecutableJar(path) {
-    String jarPath = path.toString()
-    String executablePath = path.substring(0, path.lastIndexOf("."))
+  static def makeExecutableJar(path, targetPath) {
+    execute("echo \"#!/bin/sh\" > ${targetPath}")
+    execute("echo \"exec java -jar \\\$0 \"\\\$@\"\" >> ${targetPath}")
+    execute("cat ${path} >> ${targetPath}")
+    execute("chmod +x ${targetPath}")
+  }
 
-    execute("echo \"#!/bin/sh\" > ${executablePath}")
-    execute("echo \"exec java -jar \\\$0 \"\\\$@\"\" >> ${executablePath}")
-    execute("cat ${jarPath} >> ${executablePath}")
-    execute("chmod +x ${executablePath}")
+  static def zip(path) {
+    execute("zip -9 ${path}.zip ${path}")
   }
 
   static String getValue(obj, key, defaultValue) {
