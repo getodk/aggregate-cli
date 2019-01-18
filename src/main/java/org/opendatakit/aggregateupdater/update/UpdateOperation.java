@@ -32,7 +32,6 @@ import org.opendatakit.cli.Param;
 public class UpdateOperation {
 
   private static final Param<Version> REQUESTED_VERSION = arg("rv", "requested-version", "Requested version (latest by default)", Version::from);
-  private static final Param<Void> DRY_RUN = flag("dr", "dry-run", "Dry run (emulate update process)");
   private static final Param<Void> FORCE = flag("f", "force", "Force update");
   private static final Param<Void> ALWAYS_YES = flag("y", "yes", "Always answer 'yes' to confirm prompts");
   private static final Param<Void> VERBOSE = flag("vv", "verbose", "Verbose mode. Shows all commands");
@@ -54,13 +53,12 @@ public class UpdateOperation {
         flag("u", "update", "Update ODK Aggregate"),
         (console, args) -> execute(http, console, args),
         emptyList(),
-        asList(DRY_RUN, REQUESTED_VERSION, INCLUDE_BETA_VERSIONS, FORCE, ALWAYS_YES, VERBOSE)
+        asList(REQUESTED_VERSION, INCLUDE_BETA_VERSIONS, FORCE, ALWAYS_YES, VERBOSE)
     );
   }
 
   private static void execute(Http http, Console console, Args args) {
     console.setVerboseMode(args.has(VERBOSE));
-    console.setDryRunMode(args.has(DRY_RUN));
     console.setAlwaysYesMode(args.has(ALWAYS_YES));
 
     console.out("Update ODK Aggregate");

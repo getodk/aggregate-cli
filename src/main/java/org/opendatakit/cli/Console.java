@@ -19,7 +19,6 @@ public class Console {
   private final PrintStream outStream;
   private final PrintStream errorStream;
   private boolean verboseMode = false;
-  private boolean dryRunMode = false;
   private boolean alwaysYesMode = false;
 
   public Console(InputStream inStream, PrintStream outStream, PrintStream errorStream) {
@@ -73,8 +72,6 @@ public class Console {
     if (verboseMode) {
       outStream.println(command);
     }
-    if (dryRunMode)
-      return;
 
     Process process = getProcess(command);
     ProcessWatcher processWatcher = ProcessWatcher.attach(process)
@@ -110,14 +107,6 @@ public class Console {
       outStream.println();
     }
     verboseMode = enabled;
-  }
-
-  public void setDryRunMode(boolean enabled) {
-    if (enabled && verboseMode) {
-      outStream.println("[Console] Enabling dry run mode. No command will be actually executed");
-      outStream.println();
-    }
-    dryRunMode = enabled;
   }
 
   public void setAlwaysYesMode(boolean enabled) {
