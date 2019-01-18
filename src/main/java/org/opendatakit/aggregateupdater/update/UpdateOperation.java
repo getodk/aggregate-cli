@@ -37,7 +37,7 @@ public class UpdateOperation {
   private static final Param<Void> ALWAYS_YES = flag("y", "yes", "Always answer 'yes' to confirm prompts");
   private static final Param<Void> VERBOSE = flag("vv", "verbose", "Verbose mode. Shows all commands");
   private static final Path USER_HOME = Paths.get(System.getProperty("user.home")).toAbsolutePath();
-  private static final Path VERSION_FILE = USER_HOME.resolve("aggregate-version.txt");
+  private static final Path VERSION_FILE = Paths.get("/var/lib/aggregate-version.txt");
   private static final Path BACKUP = USER_HOME.resolve("aggregate-backup");
   private static final Path BACKUP_CONF = BACKUP.resolve("conf");
   private static final Path BACKUP_WEBAPP = BACKUP.resolve("webapp");
