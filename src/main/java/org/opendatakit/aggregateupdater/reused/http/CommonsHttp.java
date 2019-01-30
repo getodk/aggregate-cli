@@ -18,7 +18,7 @@ package org.opendatakit.aggregateupdater.reused.http;
 
 import static org.apache.http.client.config.CookieSpecs.STANDARD;
 import static org.apache.http.client.config.RequestConfig.custom;
-import static org.opendatakit.aggregateupdater.reused.HttpHelpers.uri;
+import static org.opendatakit.aggregateupdater.reused.http.HttpHelpers.uri;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

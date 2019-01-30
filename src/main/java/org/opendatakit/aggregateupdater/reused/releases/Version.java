@@ -1,8 +1,8 @@
-package org.opendatakit.aggregateupdater.releases;
+package org.opendatakit.aggregateupdater.reused.releases;
 
-import static org.opendatakit.aggregateupdater.releases.Version.Type.BETA;
-import static org.opendatakit.aggregateupdater.releases.Version.Type.LEGACY;
-import static org.opendatakit.aggregateupdater.releases.Version.Type.NORMAL;
+import static org.opendatakit.aggregateupdater.reused.releases.Version.Type.BETA;
+import static org.opendatakit.aggregateupdater.reused.releases.Version.Type.LEGACY;
+import static org.opendatakit.aggregateupdater.reused.releases.Version.Type.NORMAL;
 
 import java.util.Objects;
 import java.util.Optional;

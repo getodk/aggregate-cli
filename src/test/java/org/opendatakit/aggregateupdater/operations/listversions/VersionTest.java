@@ -1,4 +1,4 @@
-package org.opendatakit.aggregateupdater.listversions;
+package org.opendatakit.aggregateupdater.operations.listversions;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 
 import org.junit.jupiter.api.Test;
-import org.opendatakit.aggregateupdater.releases.Version;
+import org.opendatakit.aggregateupdater.reused.releases.Version;
 
 class VersionTest {
   @Test

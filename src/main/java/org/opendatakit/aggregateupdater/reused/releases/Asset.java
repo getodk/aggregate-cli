@@ -1,6 +1,6 @@
-package org.opendatakit.aggregateupdater.releases;
+package org.opendatakit.aggregateupdater.reused.releases;
 
-import static org.opendatakit.aggregateupdater.reused.HttpHelpers.url;
+import static org.opendatakit.aggregateupdater.reused.http.HttpHelpers.url;
 
 import java.net.URL;
 import java.time.OffsetDateTime;

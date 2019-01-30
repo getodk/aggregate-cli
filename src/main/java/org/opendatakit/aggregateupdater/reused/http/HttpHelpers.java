@@ -14,7 +14,7 @@
  * the License.
  */
 
-package org.opendatakit.aggregateupdater.reused;
+package org.opendatakit.aggregateupdater.reused.http;
 
 import java.net.MalformedURLException;
 import java.net.URI;

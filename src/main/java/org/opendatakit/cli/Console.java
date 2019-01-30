@@ -39,6 +39,10 @@ public class Console {
     outStream.println(text);
   }
 
+  public void error() {
+    errorStream.println();
+  }
+
   public void error(String text) {
     errorStream.println(text);
   }

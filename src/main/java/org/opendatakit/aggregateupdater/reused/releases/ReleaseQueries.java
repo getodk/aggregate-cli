@@ -1,8 +1,8 @@
-package org.opendatakit.aggregateupdater.releases;
+package org.opendatakit.aggregateupdater.reused.releases;
 
 import static java.util.Comparator.reverseOrder;
 import static java.util.stream.Collectors.toList;
-import static org.opendatakit.aggregateupdater.reused.HttpHelpers.url;
+import static org.opendatakit.aggregateupdater.reused.http.HttpHelpers.url;
 
 import java.util.List;
 import org.opendatakit.aggregateupdater.reused.http.Request;

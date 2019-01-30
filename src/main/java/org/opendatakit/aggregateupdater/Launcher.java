@@ -1,9 +1,9 @@
 package org.opendatakit.aggregateupdater;
 
-import org.opendatakit.aggregateupdater.listversions.ListAvailableVersions;
+import org.opendatakit.aggregateupdater.operations.ListAvailableVersions;
 import org.opendatakit.aggregateupdater.reused.http.CommonsHttp;
 import org.opendatakit.aggregateupdater.reused.http.Http;
-import org.opendatakit.aggregateupdater.update.UpdateOperation;
+import org.opendatakit.aggregateupdater.operations.UpdateOperation;
 import org.opendatakit.cli.Cli;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

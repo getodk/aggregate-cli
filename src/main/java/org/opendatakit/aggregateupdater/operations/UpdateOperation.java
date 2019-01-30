@@ -1,11 +1,11 @@
-package org.opendatakit.aggregateupdater.update;
+package org.opendatakit.aggregateupdater.operations;
 
 import static java.lang.String.format;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
-import static org.opendatakit.aggregateupdater.listversions.ListAvailableVersions.INCLUDE_BETA_VERSIONS;
+import static org.opendatakit.aggregateupdater.operations.ListAvailableVersions.INCLUDE_BETA_VERSIONS;
 import static org.opendatakit.aggregateupdater.reused.Optionals.race;
 import static org.opendatakit.cli.Param.arg;
 import static org.opendatakit.cli.Param.flag;
@@ -20,9 +20,9 @@ import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import org.opendatakit.aggregateupdater.releases.Release;
-import org.opendatakit.aggregateupdater.releases.ReleaseQueries;
-import org.opendatakit.aggregateupdater.releases.Version;
+import org.opendatakit.aggregateupdater.reused.releases.Release;
+import org.opendatakit.aggregateupdater.reused.releases.ReleaseQueries;
+import org.opendatakit.aggregateupdater.reused.releases.Version;
 import org.opendatakit.aggregateupdater.reused.http.Http;
 import org.opendatakit.cli.Args;
 import org.opendatakit.cli.Console;
@@ -83,7 +83,10 @@ public class UpdateOperation {
 
     Optional<Version> maybeSelectedVersion = race(requestedVersion, latestVersion);
     if (!maybeSelectedVersion.isPresent()) {
-      console.error("Can't install the selected version");
+      console.error("Can't select a version for the update:");
+      console.error("- Either you didn't request one or we can't find out the latest available version");
+      console.error("- Try with the -ib flag to include beta releases");
+      console.error();
       console.exit(1);
     }
 

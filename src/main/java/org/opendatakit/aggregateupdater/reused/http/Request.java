@@ -17,7 +17,7 @@
 package org.opendatakit.aggregateupdater.reused.http;
 
 import static java.util.Collections.emptyList;
-import static org.opendatakit.aggregateupdater.reused.HttpHelpers.url;
+import static org.opendatakit.aggregateupdater.reused.http.HttpHelpers.url;
 import static org.opendatakit.aggregateupdater.reused.http.Request.Method.GET;
 
 import com.fasterxml.jackson.core.type.TypeReference;

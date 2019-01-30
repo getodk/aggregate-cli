@@ -1,4 +1,4 @@
-package org.opendatakit.aggregateupdater.listversions;
+package org.opendatakit.aggregateupdater.operations;
 
 import static java.time.format.DateTimeFormatter.ofLocalizedDateTime;
 import static java.time.format.FormatStyle.LONG;
@@ -10,8 +10,8 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.opendatakit.aggregateupdater.releases.Release;
-import org.opendatakit.aggregateupdater.releases.ReleaseQueries;
+import org.opendatakit.aggregateupdater.reused.releases.Release;
+import org.opendatakit.aggregateupdater.reused.releases.ReleaseQueries;
 import org.opendatakit.aggregateupdater.reused.http.Http;
 import org.opendatakit.cli.Args;
 import org.opendatakit.cli.Console;
