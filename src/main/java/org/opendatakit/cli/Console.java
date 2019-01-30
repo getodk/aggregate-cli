@@ -12,23 +12,26 @@ import java.io.UncheckedIOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.function.Consumer;
 
 public class Console {
+  private final HelpFormatter helpFormatter;
   private final InputStream inStream;
   private final PrintStream outStream;
   private final PrintStream errorStream;
   private boolean verboseMode = false;
   private boolean alwaysYesMode = false;
 
-  public Console(InputStream inStream, PrintStream outStream, PrintStream errorStream) {
+  public Console(HelpFormatter helpFormatter, InputStream inStream, PrintStream outStream, PrintStream errorStream) {
+    this.helpFormatter = helpFormatter;
     this.inStream = inStream;
     this.outStream = outStream;
     this.errorStream = errorStream;
   }
 
-  public static Console std() {
-    return new Console(System.in, System.out, System.err);
+  public static Console std(HelpFormatter helpFormatter) {
+    return new Console(helpFormatter, System.in, System.out, System.err);
   }
 
   public void out() {
@@ -133,6 +136,17 @@ public class Console {
       return confirm(message);
     } else
       return !input.equalsIgnoreCase("no");
+  }
+
+  public void block(String name, Runnable block) {
+    out("- " + name);
+    block.run();
+    out("  done");
+    out();
+  }
+
+  public void printHelp(Set<Operation> requiredOperations, Set<Operation> operations) {
+    out(helpFormatter.renderHelp(requiredOperations, operations));
   }
 
   private static class ProcessWatcher implements Runnable {

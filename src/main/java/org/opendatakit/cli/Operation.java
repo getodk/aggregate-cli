@@ -64,6 +64,15 @@ public class Operation {
     return deprecated;
   }
 
+  public void accept(Console console, Args args) {
+    payload.accept(console, args);
+  }
+
+  @Override
+  public String toString() {
+    return "Operation " + param.getShortCodeSyntax();
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -79,9 +88,5 @@ public class Operation {
   @Override
   public int hashCode() {
     return Objects.hash(param, payload, requiredParams, optionalParams, deprecated);
-  }
-
-  public void accept(Console console, Args args) {
-    payload.accept(console, args);
   }
 }

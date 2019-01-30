@@ -137,4 +137,8 @@ public class Param<T> {
         ", mapper=" + mapper +
         '}';
   }
+
+  public String getShortCodeSyntax() {
+    return "-" + shortCode;
+  }
 }

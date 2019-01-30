@@ -1,0 +1,21 @@
+{
+  "home": "/root",
+  "jdbc": {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "db": "aggregate",
+    "schema": "aggregate",
+    "user": "aggregate",
+    "password": "aggregate"
+  },
+  "security": {
+    "forceHttpsLinks": true,
+    "port": 80,
+    "securePort": 443
+  },
+  "tomcat": {
+    "uid": "tomcat8",
+    "gid": "tomcat8",
+    "webappsPath": "/var/lib/tomcat8/webapps"
+  }
+}

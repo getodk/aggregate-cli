@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Stream;
 import org.apache.commons.cli.CommandLine;
@@ -53,18 +52,27 @@ public class Cli {
   private final Set<BiConsumer<Cli, CommandLine>> otherwiseCallbacks = new HashSet<>();
   private final Set<Operation> executedOperations = new HashSet<>();
 
-  private final List<Consumer<Throwable>> onErrorCallbacks = new ArrayList<>();
+  private final Console console;
+  private final List<BiConsumer<Throwable, Console>> onErrorCallbacks = new ArrayList<>();
+  private final List<BiConsumer<Set<Param>, Console>> onMissingParamCallbacks = new ArrayList<>();
 
-  public Cli() {
-    register(Operation.of(SHOW_HELP, (console, args) -> printHelp()));
-    register(Operation.of(SHOW_VERSION, (console, args) -> printVersion()));
+  Cli(Console console) {
+    this.console = console;
+    register(Operation.of(SHOW_HELP, (__, ___) -> printHelp()));
+    register(Operation.of(SHOW_VERSION, (__, ___) -> printVersion()));
+  }
+
+  public static Cli std(String name) {
+    HelpFormatter helpFormatter = new HelpFormatter(name);
+    Console console = Console.std(helpFormatter);
+    return new Cli(console);
   }
 
   /**
    * Prints the help message with all the registered operations and their paramsº
    */
   public void printHelp() {
-    CustomHelpFormatter.printHelp(requiredOperations, operations);
+    console.printHelp(requiredOperations, operations);
   }
 
   /**
@@ -103,7 +111,7 @@ public class Cli {
   public void run(String[] args) {
     Set<Param> allParams = getAllParams();
     CommandLine cli = getCli(args, allParams);
-    Console console = Console.std();
+
     try {
       requiredOperations.forEach(operation -> {
         checkForMissingParams(cli, operation.requiredParams);
@@ -122,13 +130,13 @@ public class Cli {
         otherwiseCallbacks.forEach(callback -> callback.accept(this, cli));
     } catch (Throwable t) {
       if (!onErrorCallbacks.isEmpty())
-        onErrorCallbacks.forEach(callback -> callback.accept(t));
+        onErrorCallbacks.forEach(callback -> callback.accept(t, console));
       else {
-        System.err.println("Error: " + t.getMessage());
-        System.err.println("No error callbacks have been defined");
-        log.error("Error", t);
-        System.exit(1);
+        console.error("Error: " + t.getMessage());
       }
+      printHelp();
+      log.error("Error", t);
+      System.exit(1);
     }
   }
 
@@ -136,8 +144,13 @@ public class Cli {
    * This method lets third parties react when the launched operations produce an
    * uncaught exception that raises up to this class.
    */
-  public Cli onError(Consumer<Throwable> callback) {
+  public Cli onError(BiConsumer<Throwable, Console> callback) {
     onErrorCallbacks.add(callback);
+    return this;
+  }
+
+  public Cli onMissingParam(BiConsumer<Set<Param>, Console> callback) {
+    onMissingParamCallbacks.add(callback);
     return this;
   }
 
@@ -169,7 +182,11 @@ public class Cli {
     if (!missingParams.isEmpty()) {
       System.out.print("Missing params: ");
       System.out.print(missingParams.stream().map(param -> "-" + param.shortCode).collect(joining(", ")));
-      System.out.println("");
+      System.out.println();
+      if (!onMissingParamCallbacks.isEmpty()) {
+        onMissingParamCallbacks.forEach(c -> c.accept(missingParams, console));
+        System.out.println();
+      }
       printHelp();
       System.exit(1);
     }
