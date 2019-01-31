@@ -68,3 +68,7 @@ jar {
     zip("${buildDir}/libs/aggregate-updater")
   }
 }
+
+test {
+  useJUnitPlatform()
+}
