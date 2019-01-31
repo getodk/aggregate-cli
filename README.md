@@ -53,6 +53,32 @@ Optional params for -i operation:
   -y,--yes                         Always answer 'yes' to confirm prompts
 ```
 
+The install and update operations require you to provide the path to a JSON configuration file that describes your environment. There's a template of this file at [src/main/resources/configuration.tpl.json](src/main/resources/configuration.tpl.json):
+
+```json
+{
+  "home": "/root",
+  "jdbc": {
+    "host": "127.0.0.1",
+    "port": 5432,
+    "db": "aggregate",
+    "schema": "aggregate",
+    "user": "aggregate",
+    "password": "aggregate"
+  },
+  "security": {
+    "forceHttpsLinks": true,
+    "port": 80,
+    "securePort": 443
+  },
+  "tomcat": {
+    "uid": "tomcat8",
+    "gid": "tomcat8",
+    "webappsPath": "/var/lib/tomcat8/webapps"
+  }
+}
+``` 
+
 ## Setting up your development environment
 
 These instructions are for [IntelliJ IDEA Community edition](https://www.jetbrains.com/idea/), which is the (free) Java IDE we use for all the ODK toolsuite, but you don't really need any specific IDE to work with this codebase. Any Java IDE will support any of the steps we will be describing.
