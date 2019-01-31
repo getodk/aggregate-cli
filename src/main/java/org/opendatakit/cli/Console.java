@@ -151,14 +151,7 @@ public class Console {
   }
 
   public void requireSuperuser() {
-    StringBuilder out = new StringBuilder();
-    Process process = getProcess("whoami");
-    ProcessWatcher processWatcher = ProcessWatcher.attach(process)
-        .onOut(out::append)
-        .build();
-    newSingleThreadExecutor().submit(processWatcher);
-    waitFor(process);
-    if (!out.toString().equals("root"))
+    if (!System.getProperty("user.name").equals("root"))
       throw new Exceptions.OperationException("Superuser privileges required. Try running it with sudo.");
   }
 
