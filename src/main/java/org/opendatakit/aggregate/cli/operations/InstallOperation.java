@@ -13,6 +13,7 @@ import static org.opendatakit.aggregate.cli.operations.Install.install;
 import static org.opendatakit.cli.Param.arg;
 import static org.opendatakit.cli.Param.flag;
 
+import java.util.Optional;
 import org.opendatakit.aggregate.cli.operations.Exceptions.OperationException;
 import org.opendatakit.aggregate.cli.reused.Pair;
 import org.opendatakit.aggregate.cli.reused.http.Http;
@@ -88,8 +89,10 @@ public class InstallOperation {
   }
 
   private static Pair<Version, String> resolveSelectedVersion(Http http, Args args) {
-    if (args.has(CUSTOM_URL))
-      return Pair.of(args.get(CUSTOM_VERSION), args.get(CUSTOM_URL));
+    Optional<String> maybeCustomUrl = args.getOptional(CUSTOM_URL).filter(s -> !s.trim().isEmpty());
+    Optional<Version> maybeCustomVersion = args.getOptional(CUSTOM_VERSION);
+    if (maybeCustomVersion.isPresent() && maybeCustomUrl.isPresent())
+      return Pair.of(maybeCustomVersion.get(), maybeCustomUrl.get());
 
     Version latestVersion = http.execute(ReleaseQueries.latest(args.has(INCLUDE_PRE_RELEASES))
         .withMapper(Release::getVersion))
