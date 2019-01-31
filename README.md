@@ -17,6 +17,42 @@ ODK Aggregate CLI is part of Open Data Kit (ODK), a free and open-source set of 
 * ODK developer Slack archive: [http://opendatakit.slackarchive.io](http://opendatakit.slackarchive.io) 
 * ODK developer wiki: [https://github.com/opendatakit/opendatakit/wiki](https://github.com/opendatakit/opendatakit/wiki)
 
+## Usage
+
+```
+Launch an operation with: aggregate-cli <operation> <params>
+
+Available operations:
+  -h,--help                        Show help
+  -i,--install                     Install ODK Aggregate
+  -l,--list                        List available versions
+  -u,--update                      Update ODK Aggregate
+  -v,--version                     Show version
+
+Params for -u operation:
+  -c,--configuration <arg>         Path to the configuration file (JSON)
+Optional params for -u operation:
+  -f,--force                       Force update
+  -ip,--include-pre-releases       Include pre-release versions
+  -rv,--requested-version <arg>    Requested version (latest by default)
+  -vv,--verbose                    Verbose mode. Shows all commands
+  -y,--yes                         Always answer 'yes' to confirm prompts
+
+Params for -l operation:
+Optional params for -l operation:
+  -ip,--include-pre-releases       Include pre-release versions
+
+Params for -i operation:
+  -c,--configuration <arg>         Path to the configuration file (JSON)
+Optional params for -i operation:
+  -cu,--custom-url <arg>           Custom URL to download the Aggregate WAR package
+  -cv,--custom-version <arg>       Version that the custom Aggregate WAR URL corresponds to
+  -f,--force                       Force update
+  -ip,--include-pre-releases       Include pre-release versions
+  -vv,--verbose                    Verbose mode. Shows all commands
+  -y,--yes                         Always answer 'yes' to confirm prompts
+```
+
 ## Setting up your development environment
 
 These instructions are for [IntelliJ IDEA Community edition](https://www.jetbrains.com/idea/), which is the (free) Java IDE we use for all the ODK toolsuite, but you don't really need any specific IDE to work with this codebase. Any Java IDE will support any of the steps we will be describing.
