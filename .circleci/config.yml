@@ -9,7 +9,9 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}
       - run: ./gradlew check
+      - run: ./gradlew jacocoTestReport
       - run: ./gradlew jar
+      - run: bash <(curl -s https://codecov.io/bash)
       - save_cache:
           paths:
             - ~/.gradle
