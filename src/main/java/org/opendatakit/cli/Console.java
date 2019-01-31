@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.function.Consumer;
+import org.opendatakit.aggregate.cli.operations.Exceptions;
 
 public class Console {
   private final HelpFormatter helpFormatter;
@@ -147,6 +148,18 @@ public class Console {
 
   public void printHelp(Set<Operation> requiredOperations, Set<Operation> operations) {
     out(helpFormatter.renderHelp(requiredOperations, operations));
+  }
+
+  public void requireSuperuser() {
+    StringBuilder out = new StringBuilder();
+    Process process = getProcess("whoami");
+    ProcessWatcher processWatcher = ProcessWatcher.attach(process)
+        .onOut(out::append)
+        .build();
+    newSingleThreadExecutor().submit(processWatcher);
+    waitFor(process);
+    if (!out.toString().equals("root"))
+      throw new Exceptions.OperationException("Superuser privileges required. Try running it with sudo.");
   }
 
   private static class ProcessWatcher implements Runnable {

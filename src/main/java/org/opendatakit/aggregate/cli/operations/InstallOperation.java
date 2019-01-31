@@ -50,6 +50,8 @@ public class InstallOperation {
     console.setVerboseMode(args.has(VERBOSE));
     console.setAlwaysYesMode(args.has(ALWAYS_YES));
 
+    console.requireSuperuser();
+
     // Parse the configuration and check some flag/arg combinations before starting
     EnvironmentConfiguration conf = args.get(CONFIGURATION_PATH);
 
@@ -68,7 +70,6 @@ public class InstallOperation {
     console.out("Installing ODK Aggregate");
     console.out();
     console.out("Please, read carefully:");
-    console.out("- You need superuser permissions to run this operation.");
     console.out("- The ROOT webapp will be replaced with the latest available Aggregate release or a custom build you provide.");
     console.out("- Tomcat will be stopped during the whole process.");
     console.out();
