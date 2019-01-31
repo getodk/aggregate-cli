@@ -8,3 +8,4 @@ build
 logback.xml
 logback-test.xml
 gradle.properties
+aggregate-cli.log
