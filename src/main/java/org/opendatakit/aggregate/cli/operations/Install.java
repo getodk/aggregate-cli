@@ -47,7 +47,7 @@ final class Install {
   }
 
   private static void deploy(Console console, EnvironmentConfiguration conf, String warUrl) {
-    Path tmpDir = createTempDirectory("aggregate-updater");
+    Path tmpDir = createTempDirectory("aggregate-cli");
     Path tmpAggregateWar = tmpDir.resolve("aggregate.war");
     console.execute(format("wget -O %s %s", tmpAggregateWar, warUrl));
     console.execute(format("unzip -qq %s -d %s", tmpAggregateWar, conf.getRootWebappPath()));

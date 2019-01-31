@@ -49,7 +49,7 @@ dependencies {
 }
 
 buildConfig {
-  appName = 'ODK Aggregate Updater'
+  appName = 'ODK Aggregate CLI'
   version = getVersionName()
   clsName = 'BuildConfig'
   packageName = 'org.opendatakit.briefcase.buildconfig'
@@ -57,7 +57,7 @@ buildConfig {
 
 jar {
   manifest {
-    attributes "Main-Class": "org.opendatakit.aggregateupdater.Launcher"
+    attributes "Main-Class": "org.opendatakit.aggregate.cli.Launcher"
   }
 
   from {
@@ -65,8 +65,8 @@ jar {
   }
 
   doLast {
-    makeExecutableJar("${buildDir}/libs/${archivesBaseName}-${version}.jar", "${buildDir}/libs/aggregate-updater")
-    zip("${buildDir}/libs/aggregate-updater")
+    makeExecutableJar("${buildDir}/libs/${archivesBaseName}-${version}.jar", "${buildDir}/libs/aggregate-cli")
+    zip("${buildDir}/libs/aggregate-cli")
   }
 }
 
