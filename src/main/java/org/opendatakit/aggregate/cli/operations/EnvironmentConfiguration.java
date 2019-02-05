@@ -162,12 +162,14 @@ class EnvironmentConfiguration {
   }
 
   static class SecurityConfiguration {
+    private final String hostname;
     final boolean forceHttpsLinks;
     final int port;
     final int securePort;
     final boolean checkHostnames;
 
-    SecurityConfiguration(boolean forceHttpsLinks, int port, int securePort, boolean checkHostnames) {
+    SecurityConfiguration(String hostname, boolean forceHttpsLinks, int port, int securePort, boolean checkHostnames) {
+      this.hostname = hostname;
       this.forceHttpsLinks = forceHttpsLinks;
       this.port = port;
       this.securePort = securePort;
@@ -176,6 +178,7 @@ class EnvironmentConfiguration {
 
     static SecurityConfiguration from(Map<String, Object> data) {
       return new SecurityConfiguration(
+          (String) Objects.requireNonNull(data.get("hostname")),
           (Boolean) Objects.requireNonNull(data.get("forceHttpsLinks")),
           (Integer) Objects.requireNonNull(data.get("port")),
           (Integer) Objects.requireNonNull(data.get("securePort")),
@@ -185,6 +188,7 @@ class EnvironmentConfiguration {
 
     Map<String, Object> asMap() {
       Map<String, Object> map = new HashMap<>();
+      map.put("hostname", hostname);
       map.put("forceHttpsLinks", forceHttpsLinks ? "true" : "false");
       map.put("port", port);
       map.put("securePort", securePort);

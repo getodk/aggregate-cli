@@ -9,6 +9,7 @@
     "password": "aggregate"
   },
   "security": {
+    "hostname": "aggregate.example.com",
     "forceHttpsLinks": true,
     "port": 80,
     "securePort": 443,

@@ -67,6 +67,7 @@ The install and update operations require you to provide the path to a JSON conf
     "password": "aggregate"
   },
   "security": {
+    "hostname": "aggregate.example.com",
     "forceHttpsLinks": true,
     "port": 80,
     "securePort": 443,
