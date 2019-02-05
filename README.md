@@ -69,7 +69,8 @@ The install and update operations require you to provide the path to a JSON conf
   "security": {
     "forceHttpsLinks": true,
     "port": 80,
-    "securePort": 443
+    "securePort": 443,
+    "checkHostnames": true
   },
   "tomcat": {
     "uid": "tomcat8",
