@@ -9,7 +9,7 @@ import org.opendatakit.aggregate.cli.reused.http.Request;
 
 public class ReleaseQueries {
   public static Request<List<Release>> all(boolean includePreReleases) {
-    return Request.getJsonList(url("https://api.github.com/repos/opendatakit/aggregate/releases"))
+    return Request.getJsonList(url("https://api.github.com/repos/getodk/aggregate/releases"))
         .header("Accept", "application/vnd.github.v3+json")
         .header("User-Agent", "Aggregate Updater")
         .withMapper(jsonObjects -> jsonObjects.stream()

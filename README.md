@@ -1,21 +1,20 @@
 # ODK Aggregate CLI
 ![Platform](https://img.shields.io/badge/platform-Java-blue.svg)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Build status](https://circleci.com/gh/opendatakit/aggregate-cli.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/opendatakit/aggregate-cli)
-[![codecov.io](https://codecov.io/github/opendatakit/aggregate-cli/branch/master/graph/badge.svg)](https://codecov.io/github/opendatakit/aggregate-cli)
-[![Slack status](http://slack.opendatakit.org/badge.svg)](http://slack.opendatakit.org)
+[![Build status](https://circleci.com/gh/getodk/aggregate-cli.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/getodk/aggregate-cli)
+[![codecov.io](https://codecov.io/github/getodk/aggregate-cli/branch/master/graph/badge.svg)](https://codecov.io/github/getodk/aggregate-cli)
+[![Slack](https://img.shields.io/badge/chat-on%20slack-brightgreen)](https://slack.getodk.org)
 
-ODK Aggregate CLI is a command line application to help with the installation and update of [ODK Aggregate](https://github.com/opendatakit/aggregate) server, starting with ODK Aggregate v2.0.   
+ODK Aggregate CLI is a command line application to help with the installation and update of [ODK Aggregate](https://github.com/getodk/aggregate) server, starting with ODK Aggregate v2.0.   
 
-ODK Aggregate CLI is bundled with all [ODK Aggregate Cloud-Config](https://github.com/opendatakit/aggregate/tree/master/cloud-config) stacks.
+ODK Aggregate CLI is bundled with all [ODK Aggregate Cloud-Config](https://github.com/getodk/aggregate/tree/master/cloud-config) stacks.
 
-ODK Aggregate CLI is part of Open Data Kit (ODK), a free and open-source set of tools which help organizations author, field, and manage mobile data collection solutions. Learn more about the Open Data Kit project and its history [here](https://opendatakit.org/about/) and read about example ODK deployments [here](https://opendatakit.org/about/deployments/).
+ODK Aggregate CLI is part of ODK, a free and open-source set of tools which help organizations author, field, and manage mobile data collection solutions. Learn more about the ODK project and its history [here](https://getodk.org/about/) and read about example ODK deployments [here](https://getodk.org/about/deployments/).
 
-* ODK website: [https://opendatakit.org](https://opendatakit.org)
-* ODK forum: [https://forum.opendatakit.org](https://forum.opendatakit.org)
-* ODK developer Slack chat: [http://slack.opendatakit.org](http://slack.opendatakit.org) 
-* ODK developer Slack archive: [http://opendatakit.slackarchive.io](http://opendatakit.slackarchive.io) 
-* ODK developer wiki: [https://github.com/opendatakit/opendatakit/wiki](https://github.com/opendatakit/opendatakit/wiki)
+* ODK website: [https://getodk.org](https://getodk.org)
+* ODK forum: [https://forum.getodk.org](https://forum.getodk.org)
+* ODK developer Slack chat: [https://slack.getodk.org](https://slack.getodk.org) 
+* ODK developer wiki: [https://github.com/getodk/getodk/wiki](https://github.com/getodk/getodk/wiki)
 
 ## Usage
 
