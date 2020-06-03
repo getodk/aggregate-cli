@@ -151,7 +151,7 @@ public class Console {
   }
 
   public void requireSuperuser() {
-    if (!System.getProperty("user.name").equals("root"))
+    if (!System.getProperty("user.name").trim().equals("root"))
       throw new Exceptions.OperationException("Superuser privileges required. Try running it with sudo.");
   }
 
