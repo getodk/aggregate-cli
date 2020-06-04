@@ -1,0 +1,22 @@
+<configuration>
+  <appender name="ROLLINGFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>aggregate-cli.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>aggregate-cli.%d{yyyy-MM-dd}.log</fileNamePattern>
+      <maxHistory>30</maxHistory>
+      <totalSizeCap>100MB</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+      <pattern>%d [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name="org.opendatakit" level="info"/>
+  <logger name="org.apache.http" level="error"/>
+  <logger name="org.apache.http.impl.conn.PoolingHttpClientConnectionManager" level="error"/>
+  <logger name="org.apache.http.impl.conn.BasicHttpClientConnectionManager" level="error"/>
+
+  <root level="info">
+    <appender-ref ref="ROLLINGFILE"/>
+  </root>
+</configuration>
