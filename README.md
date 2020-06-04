@@ -92,6 +92,10 @@ These instructions are for [IntelliJ IDEA Community edition](https://www.jetbrai
 
 - Make sure you set Java 8 as the project's selected SDK
 
+### Logging
+
+Copy src/main/resources/logback-release.xml to src/main/resources/logback.xml. This conf will be used when launching Aggregate CLI.
+
 ## Contributing code
 
 Any and all contributions to the project are welcome.
