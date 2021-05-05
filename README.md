@@ -1,8 +1,9 @@
-# ODK Aggregate CLI
+## ⚠️ ODK Aggregate CLI is no longer being updated. Please use [ODK Central](https://github.com/getodk/central) instead. ⚠️
+
+## Overview
 ![Platform](https://img.shields.io/badge/platform-Java-blue.svg)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build status](https://circleci.com/gh/getodk/aggregate-cli.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/getodk/aggregate-cli)
-[![codecov.io](https://codecov.io/github/getodk/aggregate-cli/branch/master/graph/badge.svg)](https://codecov.io/github/getodk/aggregate-cli)
 [![Slack](https://img.shields.io/badge/chat-on%20slack-brightgreen)](https://slack.getodk.org)
 
 ODK Aggregate CLI is a command line application to help with the installation and update of [ODK Aggregate](https://github.com/getodk/aggregate) server, starting with ODK Aggregate v2.0.   
